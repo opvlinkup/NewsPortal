@@ -1,0 +1,76 @@
+﻿@model NewsPortal.Models.ViewModels.ArticleEditViewModel
+@{
+    ViewData["Title"] = Model.Id.HasValue ? "Edit News" : "Create News";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ExistingImagePath" />
+
+    <h5>Русская версия</h5>
+    <div class="mb-3">
+        <label asp-for="TitleRu" class="form-label">Заголовок (RU)</label>
+        <input asp-for="TitleRu" class="form-control bg-dark text-light" />
+        <span asp-validation-for="TitleRu" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SubtitleRu" class="form-label">Подзаголовок (RU)</label>
+        <input asp-for="SubtitleRu" class="form-control bg-dark text-light border-0" />
+        <span asp-validation-for="SubtitleRu" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TextRu" class="form-label">Текст (RU)</label>
+        <textarea asp-for="TextRu" class="form-control bg-dark text-light" rows="6"></textarea>
+        <span asp-validation-for="TextRu" class="text-danger"></span>
+    </div>
+
+    <hr class="border-secondary" />
+
+    <h5>English version</h5>
+    <div class="mb-3">
+        <label asp-for="TitleEn" class="form-label">Title (EN)</label>
+        <input asp-for="TitleEn" class="form-control bg-dark text-light border-0" />
+        <span asp-validation-for="TitleEn" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SubtitleEn" class="form-label">Subtitle (EN)</label>
+        <input asp-for="SubtitleEn" class="form-control bg-dark text-light border-0" />
+        <span asp-validation-for="SubtitleEn" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TextEn" class="form-label">Text (EN)</label>
+        <textarea asp-for="TextEn" class="form-control bg-dark text-light border-0" rows="6"></textarea>
+        <span asp-validation-for="TextEn" class="text-danger"></span>
+    </div>
+
+    <hr class="border-secondary" />
+
+    <div class="mb-3">
+        <label class="form-label">Изображение</label>
+
+        @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
+        {
+            <div class="mb-2">
+                <img src="@Url.Content(Model.ExistingImagePath)"
+                     alt="Existing Image"
+                     style="max-width:200px; border-radius:6px;" />
+            </div>
+            <p class="text-muted">Оставьте поле пустым, если не хотите менять изображение.</p>
+        }
+
+        <input asp-for="ImageFile" type="file" class="form-control bg-dark text-light border-0" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

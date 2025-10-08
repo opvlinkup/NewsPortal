@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "All News";
+    var placeholder = Url.Content("~/uploads/placeholder.jpg");
+}
+
+<h2 class="text-center text-uppercase fw-bold text-primary mb-4">All News</h2>
+
+<div id="news-container" class="row"></div>
+
+<div id="loading-wrap" class="text-center mt-4" style="display:none;">
+    <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="text-center mt-3">
+    <button id="load-more-btn" class="btn btn-outline-light" style="display:none;">Load more</button>
+</div>
+
+<div id="scroll-sentinel" style="height:1px;"></div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const container = document.getElementById('news-container');
+            const loader = document.getElementById('loading-wrap');
+            const btn = document.getElementById('load-more-btn');
+            const sentinel = document.getElementById('scroll-sentinel');
+            const placeholder = '@placeholder';
+
+            const batch = 6;
+            let skip = 0, loading = false, done = false;
+
+            const escapeHtml = s => String(s || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", "&#39;");
+
+            const buildCard = a => `
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 bg-dark text-light shadow-lg border-0" style="min-height:450px;">
+                                <img src="${encodeURI(a.imagePath || placeholder)}" class="card-img-top" style="max-height:200px; object-fit:cover;" alt="${escapeHtml(a.title)}"/>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title text-warning fw-bold">${escapeHtml(a.title)}</h5>
+                                    <h6 class="card-subtitle mb-3 text-info">${escapeHtml(a.subtitle || '')}</h6>
+                                    <p class="card-text text-light">${escapeHtml((a.text || '').slice(0, 150))}...</p>
+                                    <a class="btn btn-gradient btn-lg mt-auto w-100 fw-bold" href="/News/Details/${a.id}">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+            async function load() {
+                if (loading || done) return;
+                loading = true;
+                loader.style.display = 'block';
+                btn.style.display = 'none';
+
+                try {
+                    const res = await fetch(`/GetArticles?skip=${skip}&take=${batch}`, { credentials: 'same-origin' });
+                    if (!res.ok) throw new Error(res.statusText);
+                    const data = await res.json();
+                    if (!data.length) { done = true; return; }
+
+                    container.insertAdjacentHTML('beforeend', data.map(buildCard).join(''));
+                    skip += data.length;
+                    if (data.length < batch) done = true;
+                    if (!done) btn.style.display = 'inline-block';
+                }
+                catch (e) { console.error(e); btn.style.display = 'inline-block'; }
+                finally { loader.style.display = 'none'; loading = false; }
+            }
+
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(entries => {
+                    if (entries[0].isIntersecting) load();
+                }, { root: null, rootMargin: '300px' }).observe(sentinel);
+            } else {
+                window.addEventListener('scroll', () => {
+                    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200) load();
+                });
+            }
+
+            btn.addEventListener('click', load);
+            window.addEventListener('DOMContentLoaded', load);
+        })();
+    </script>
+}

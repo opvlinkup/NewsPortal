@@ -1,0 +1,24 @@
+﻿@model NewsPortal.Models.Article
+@{
+    ViewData["Title"] = "Delete News";
+    
+    var lang = Context.Request.Cookies["lang"];
+    
+    if (string.IsNullOrWhiteSpace(lang))
+    {
+        lang = "ru";
+    }
+
+    var articleData = Model.Translations.FirstOrDefault(t => t.Language == lang)
+                      ?? Model.Translations.FirstOrDefault(t => t.Language == "ru");
+}
+
+<h2>Delete Article</h2>
+
+<p>Are you sure you want to delete <strong>@(articleData?.Title ?? "No title")</strong>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index", "Admin")">Cancel</a>
+</form>

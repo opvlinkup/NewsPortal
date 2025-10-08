@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NewsPortal.Models.ViewModels.ArticleViewModel>
+@{
+    ViewData["Title"] = "Latest News";
+    var placeholder = Url.Content("~/uploads/placeholder.png");
+}
+
+<h2 class="text-center text-uppercase fw-bold text-primary mb-4">Latest News</h2>
+
+<div class="row">
+    @foreach (var news in Model)
+    {
+        var finalImg = !string.IsNullOrEmpty(news.ImagePath)
+            ? Url.Content(news.ImagePath) 
+            : placeholder;
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-light shadow-lg border-0">
+                <img src="@finalImg"
+                     alt="@news.Title"
+                     class="card-img-top"
+                     style="max-height:200px; object-fit:cover;"
+                     onerror="this.onerror=null;this.src='@placeholder';" />
+
+                <div class="card-body">
+                    <h5 class="card-title text-warning fw-bold">@news.Title</h5>
+                    <h6 class="card-subtitle mb-3 text-info">@news.Subtitle</h6>
+                    <p class="card-text text-light">
+                        @(news.Text.Length > 150 ? news.Text[..150] + "..." : news.Text)
+                    </p>
+                    <a class="btn btn-gradient btn-lg w-100 fw-bold"
+                       href="@Url.Action("Details", "News", new { id = news.Id })">
+                        Read More
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,37 @@
+﻿@model List<NewsPortal.Models.Article>
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<h2>Admin Panel - News Management</h2>
+
+<a class="btn btn-primary mb-3" href="@Url.Action("Create", "Admin")">Create New</a>
+
+<table class="table table-dark table-striped align-middle">
+    <thead>
+    <tr>
+        <th>Title (RU)</th>
+        <th>Title (EN)</th>
+        <th>Created</th>
+        <th class="text-end">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        var titleRu = item.Translations.FirstOrDefault(t => t.Language == "ru")?.Title ?? "(нет)";
+        var titleEn = item.Translations.FirstOrDefault(t => t.Language == "en")?.Title ?? "(none)";
+        
+        <tr>
+            <td>@titleRu</td>
+            <td>@titleEn</td>
+            <td>@item.CreatedAt.ToString("dd MMM yyyy")</td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Admin", new { id = item.Id })">Edit</a>
+                <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Admin", new { id = item.Id })">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

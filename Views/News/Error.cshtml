@@ -1,0 +1,52 @@
+﻿@model System.Exception
+
+@{
+    ViewBag.Title = "Error (Development)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Error — Development</h1>
+
+@if (Model != null)
+{
+    <h2>@Html.Encode(Model.Message)</h2>
+
+    <section>
+        <h3>Exception Details</h3>
+        <pre style="white-space:pre-wrap;">@Html.Encode(Model.ToString())</pre>
+    </section>
+
+    @if (Model.InnerException != null)
+    {
+        <section>
+            <h3>Inner Exception</h3>
+            <pre style="white-space:pre-wrap;">@Html.Encode(Model.InnerException.ToString())</pre>
+        </section>
+    }
+}
+else
+{
+    <p>No exception information available.</p>
+}
+
+<section>
+    <h3>Request Information</h3>
+    <dl>
+        <dt>Method</dt><dd>@Context.Request.Method</dd>
+        <dt>Path</dt><dd>@Context.Request.Path</dd>
+        <dt>QueryString</dt><dd>@Context.Request.QueryString</dd>
+        <dt>Headers</dt>
+        <dd>
+            <pre style="white-space:pre-wrap;">
+
+@{
+    foreach (var h in Context.Request.Headers)
+    {
+        var values = h.Value.ToArray();
+        @Html.Raw(Html.Encode(h.Key + ": " + string.Join(", ", values) + "\n"))
+    }
+}
+            </pre>
+        </dd>
+    </dl>
+</section>
