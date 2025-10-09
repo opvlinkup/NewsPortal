@@ -41,6 +41,15 @@
     <value>Login</value>
   </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
-  <value>Confirm password</value>
-</data>
+    <value>Confirm Password</value>
+    <comment>ConfirmPasswordLabel</comment>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email</value>
+    <comment>EmailLabel</comment>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Password</value>
+    <comment>PasswordLabel</comment>
+  </data>
 </root>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NewsPortal.Resources.Resources {
+namespace NewsPortal.Resources {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace NewsPortal.Resources.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Models_ArticleTranslation_ru {
+    internal class Views_Shared__Layout_en {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Models_ArticleTranslation_ru() {
+        internal Views_Shared__Layout_en() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace NewsPortal.Resources.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NewsPortal.Resources.Models.ArticleTranslation.ru", typeof(Models_ArticleTranslation_ru).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NewsPortal.Resources.Views.Shared._Layout.en", typeof(Views_Shared__Layout_en).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,43 +60,52 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уже есть аккаунт?.
+        ///   Looks up a localized string similar to Admin Panel.
         /// </summary>
-        internal static string AlreadyHaveAccount {
+        internal static string AdminPanelLink {
             get {
-                return ResourceManager.GetString("AlreadyHaveAccount", resourceCulture);
+                return ResourceManager.GetString("AdminPanelLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Повторите пароль.
+        ///   Looks up a localized string similar to All News.
         /// </summary>
-        internal static string ConfirmPasswordLabel {
+        internal static string AllNewsLink {
             get {
-                return ResourceManager.GetString("ConfirmPasswordLabel", resourceCulture);
+                return ResourceManager.GetString("AllNewsLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Повторите пароль.
+        ///   Looks up a localized string similar to English.
         /// </summary>
-        internal static string ConfirmPasswordPlaceholder {
+        internal static string LanguageEnglish {
             get {
-                return ResourceManager.GetString("ConfirmPasswordPlaceholder", resourceCulture);
+                return ResourceManager.GetString("LanguageEnglish", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите email.
+        ///   Looks up a localized string similar to Russian.
         /// </summary>
-        internal static string EmailPlaceholder {
+        internal static string LanguageRussian {
             get {
-                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
+                return ResourceManager.GetString("LanguageRussian", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Войти.
+        ///   Looks up a localized string similar to Latest.
+        /// </summary>
+        internal static string LatestLink {
+            get {
+                return ResourceManager.GetString("LatestLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         internal static string LoginLink {
             get {
@@ -105,47 +114,20 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите пароль.
+        ///   Looks up a localized string similar to Logout.
         /// </summary>
-        internal static string PasswordPlaceholder {
+        internal static string LogoutLink {
             get {
-                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+                return ResourceManager.GetString("LogoutLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Зарегистрироваться.
+        ///   Looks up a localized string similar to News Portal.
         /// </summary>
-        internal static string RegisterButton {
+        internal static string NewsPortalTitle {
             get {
-                return ResourceManager.GetString("RegisterButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Регистрация.
-        /// </summary>
-        internal static string RegisterHeader {
-            get {
-                return ResourceManager.GetString("RegisterHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Регистрация пользователя.
-        /// </summary>
-        internal static string RegisterPageTitle {
-            get {
-                return ResourceManager.GetString("RegisterPageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Создайте новый аккаунт для доступа к сайту.
-        /// </summary>
-        internal static string RegisterSubtitle {
-            get {
-                return ResourceManager.GetString("RegisterSubtitle", resourceCulture);
+                return ResourceManager.GetString("NewsPortalTitle", resourceCulture);
             }
         }
     }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NewsPortal.Resources.Resources {
+namespace NewsPortal.Resources {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace NewsPortal.Resources.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Models_ArticleTranslation_ru {
+    internal class Views_Account_Register_ru {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Models_ArticleTranslation_ru() {
+        internal Views_Account_Register_ru() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace NewsPortal.Resources.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NewsPortal.Resources.Models.ArticleTranslation.ru", typeof(Models_ArticleTranslation_ru).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NewsPortal.Resources.Views.Account.Register.ru", typeof(Views_Account_Register_ru).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -69,7 +69,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Повторите пароль.
+        ///   Looks up a localized string similar to Подтвердите пароль.
         /// </summary>
         internal static string ConfirmPasswordLabel {
             get {
@@ -83,6 +83,15 @@ namespace NewsPortal.Resources.Resources {
         internal static string ConfirmPasswordPlaceholder {
             get {
                 return ResourceManager.GetString("ConfirmPasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Почта.
+        /// </summary>
+        internal static string EmailLabel {
+            get {
+                return ResourceManager.GetString("EmailLabel", resourceCulture);
             }
         }
         
@@ -101,6 +110,15 @@ namespace NewsPortal.Resources.Resources {
         internal static string LoginLink {
             get {
                 return ResourceManager.GetString("LoginLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пароль.
+        /// </summary>
+        internal static string PasswordLabel {
+            get {
+                return ResourceManager.GetString("PasswordLabel", resourceCulture);
             }
         }
         

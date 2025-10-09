@@ -14,33 +14,42 @@
     </resheader>
 
     <data name="RegisterPageTitle" xml:space="preserve">
-    <value>User Registration</value>
+    <value>Регистрация пользователя</value>
   </data>
     <data name="RegisterHeader" xml:space="preserve">
-    <value>Register</value>
+    <value>Регистрация</value>
   </data>
     <data name="RegisterSubtitle" xml:space="preserve">
-    <value>Create a new account to access the site</value>
+    <value>Создайте новый аккаунт для доступа к сайту</value>
   </data>
     <data name="EmailPlaceholder" xml:space="preserve">
-    <value>Enter email</value>
+    <value>Введите email</value>
   </data>
     <data name="PasswordPlaceholder" xml:space="preserve">
-    <value>Enter password</value>
+    <value>Введите пароль</value>
   </data>
     <data name="ConfirmPasswordPlaceholder" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>Повторите пароль</value>
   </data>
     <data name="RegisterButton" xml:space="preserve">
-    <value>Register</value>
+    <value>Зарегистрироваться</value>
   </data>
     <data name="AlreadyHaveAccount" xml:space="preserve">
-    <value>Already have an account?</value>
+    <value>Уже есть аккаунт?</value>
   </data>
     <data name="LoginLink" xml:space="preserve">
-    <value>Login</value>
+    <value>Войти</value>
   </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
-  <value>Confirm password</value>
-</data>
+    <value>Подтвердите пароль</value>
+    <comment>ConfirmPasswordLabel</comment>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Почта</value>
+    <comment>EmailLabel</comment>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Пароль</value>
+    <comment>PasswordLabel</comment>
+  </data>
 </root>

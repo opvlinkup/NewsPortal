@@ -8,7 +8,7 @@
 
 Установка
 
-git clone <url-репозитория>
+git clone https://github.com/opvlinkup/NewsPortal.git
 cd NewsPortal
 dotnet restore
 ```
@@ -34,10 +34,16 @@ dotnet ef database update
 dotnet build
 dotnet run
 ```
-Приложение будет доступно по адресам: http://localhost:5000 и https://localhost:5001.
+Приложение будет доступно по адресам: http://localhost:5000 и https://localhost:7037.
 
 ## Дополнительно
 - Горячий перезапуск: `dotnet watch run`
 - Главная страница: `/News/Index`
 - Вход в админку: `/Admin/Account/Login`
+```
+Admin: Admin@example.com
+Password: Admin123
+
+User: User@example.com
+Password: User123
 ```

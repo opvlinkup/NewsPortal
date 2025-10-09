@@ -3,26 +3,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Models.ViewModels;
 
-namespace NewsPortal.Controllers.Admin
+namespace NewsPortal.Controllers
 {
     [AllowAnonymous]
-    [Route("Admin/[controller]/[action]")]
-    public class AccountController : Controller
+    [Route("[controller]/[action]")]
+    public class AccountController(
+        UserManager<IdentityUser> userManager,
+        SignInManager<IdentityUser> signInManager,
+        ILogger<AccountController> logger)
+        : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<AccountController> _logger;
-
-        public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            ILogger<AccountController> logger)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
-        }
-
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
@@ -37,39 +27,42 @@ namespace NewsPortal.Controllers.Admin
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null || !(await _userManager.IsInRoleAsync(user, "Admin")))
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Неверный логин или пароль.");
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(
+            var result = await signInManager.PasswordSignInAsync(
                 user.UserName!, model.Password, model.RememberMe, lockoutOnFailure: true);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("Admin {Email} logged in.", model.Email);
-                return RedirectToLocal(returnUrl);
+                logger.LogInformation("User {Email} logged in.", model.Email);
+                
+                if (await userManager.IsInRoleAsync(user, "Admin"))
+                    return RedirectToLocal(returnUrl, "Admin", "Index");
+
+                return RedirectToLocal(returnUrl, "News", "Index");
             }
 
             ModelState.AddModelError(string.Empty,
                 result.IsLockedOut ? "Аккаунт временно заблокирован." : "Неверный логин или пароль.");
             return View(model);
         }
-
-        [Authorize(Roles = "Admin")]
+        
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("Admin logged out.");
+            await signInManager.SignOutAsync();
+            logger.LogInformation("User logged out.");
             return RedirectToAction("Index", "News");
         }
         
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register(string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -77,7 +70,6 @@ namespace NewsPortal.Controllers.Admin
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string? returnUrl = null)
         {
@@ -85,14 +77,15 @@ namespace NewsPortal.Controllers.Admin
                 return View(model);
 
             var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "Admin");
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                _logger.LogInformation("New admin {Email} registered.", model.Email);
-                return RedirectToLocal(returnUrl);
+                await userManager.AddToRoleAsync(user, "User");
+                await signInManager.SignInAsync(user, isPersistent: false);
+                logger.LogInformation("New user {Email} registered.", model.Email);
+
+                return RedirectToLocal(returnUrl, "News", "Index");
             }
 
             foreach (var error in result.Errors)
@@ -100,12 +93,14 @@ namespace NewsPortal.Controllers.Admin
 
             return View(model);
         }
-
-        private IActionResult RedirectToLocal(string? returnUrl)
+        
+        
+        private IActionResult RedirectToLocal(string? returnUrl, string defaultController, string defaultAction)
         {
             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
-            return RedirectToAction("Index", "Admin");
+
+            return RedirectToAction(defaultAction, defaultController);
         }
     }
 }

@@ -60,38 +60,92 @@ namespace NewsPortal.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum length is 300 characters.
+        ///   Looks up a localized string similar to Already have an account?.
         /// </summary>
-        internal static string SubtitleMaxLength {
+        internal static string AlreadyHaveAccount {
             get {
-                return ResourceManager.GetString("SubtitleMaxLength", resourceCulture);
+                return ResourceManager.GetString("AlreadyHaveAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text is required.
+        ///   Looks up a localized string similar to Confirm password.
         /// </summary>
-        internal static string TextRequired {
+        internal static string ConfirmPasswordLabel {
             get {
-                return ResourceManager.GetString("TextRequired", resourceCulture);
+                return ResourceManager.GetString("ConfirmPasswordLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum length is 200 characters.
+        ///   Looks up a localized string similar to Confirm password.
         /// </summary>
-        internal static string TitleMaxLength {
+        internal static string ConfirmPasswordPlaceholder {
             get {
-                return ResourceManager.GetString("TitleMaxLength", resourceCulture);
+                return ResourceManager.GetString("ConfirmPasswordPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title is required.
+        ///   Looks up a localized string similar to Enter email.
         /// </summary>
-        internal static string TitleRequired {
+        internal static string EmailPlaceholder {
             get {
-                return ResourceManager.GetString("TitleRequired", resourceCulture);
+                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginLink {
+            get {
+                return ResourceManager.GetString("LoginLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter password.
+        /// </summary>
+        internal static string PasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string RegisterButton {
+            get {
+                return ResourceManager.GetString("RegisterButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string RegisterHeader {
+            get {
+                return ResourceManager.GetString("RegisterHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Registration.
+        /// </summary>
+        internal static string RegisterPageTitle {
+            get {
+                return ResourceManager.GetString("RegisterPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new account to access the site.
+        /// </summary>
+        internal static string RegisterSubtitle {
+            get {
+                return ResourceManager.GetString("RegisterSubtitle", resourceCulture);
             }
         }
     }

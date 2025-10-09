@@ -1,27 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
-            <data name="TitleRequired" xml:space="preserve">
-              <value>Заголовок обязателен</value>
-            </data>
-                        <data name="TitleMaxLength" xml:space="preserve">
-              <value>Максимум 200 символов</value>
-            </data>
-                        <data name="SubtitleMaxLength" xml:space="preserve">
-              <value>Максимум 300 символов</value>
-            </data>
-                        <data name="TextRequired" xml:space="preserve">
-              <value>Текст обязателен</value>
-            </data>
-        </xsd:element>
-    </xsd:schema>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
     <resheader name="version">
-        <value>1.3</value>
+        <value>2.0</value>
     </resheader>
     <resheader name="reader">
         <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -29,4 +12,35 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+
+    <data name="RegisterPageTitle" xml:space="preserve">
+    <value>Регистрация пользователя</value>
+  </data>
+    <data name="RegisterHeader" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+    <data name="RegisterSubtitle" xml:space="preserve">
+    <value>Создайте новый аккаунт для доступа к сайту</value>
+  </data>
+    <data name="EmailPlaceholder" xml:space="preserve">
+    <value>Введите email</value>
+  </data>
+    <data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+    <data name="ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+    <data name="RegisterButton" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
+    <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Уже есть аккаунт?</value>
+  </data>
+    <data name="LoginLink" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+  <value>Повторите пароль</value>
+</data>
 </root>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NewsPortal.Resources.Resources {
+namespace NewsPortal.Resources {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace NewsPortal.Resources.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Models_ArticleTranslation_ru {
+    internal class Views_Account_Register_en {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Models_ArticleTranslation_ru() {
+        internal Views_Account_Register_en() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace NewsPortal.Resources.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NewsPortal.Resources.Models.ArticleTranslation.ru", typeof(Models_ArticleTranslation_ru).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NewsPortal.Resources.Views.Account.Register.en", typeof(Views_Account_Register_en).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,7 +60,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уже есть аккаунт?.
+        ///   Looks up a localized string similar to Already have an account?.
         /// </summary>
         internal static string AlreadyHaveAccount {
             get {
@@ -69,7 +69,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Повторите пароль.
+        ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         internal static string ConfirmPasswordLabel {
             get {
@@ -78,7 +78,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Повторите пароль.
+        ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         internal static string ConfirmPasswordPlaceholder {
             get {
@@ -87,7 +87,16 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите email.
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string EmailLabel {
+            get {
+                return ResourceManager.GetString("EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter email.
         /// </summary>
         internal static string EmailPlaceholder {
             get {
@@ -96,7 +105,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Войти.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         internal static string LoginLink {
             get {
@@ -105,7 +114,16 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите пароль.
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string PasswordLabel {
+            get {
+                return ResourceManager.GetString("PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter password.
         /// </summary>
         internal static string PasswordPlaceholder {
             get {
@@ -114,7 +132,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Зарегистрироваться.
+        ///   Looks up a localized string similar to Register.
         /// </summary>
         internal static string RegisterButton {
             get {
@@ -123,7 +141,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Регистрация.
+        ///   Looks up a localized string similar to Register.
         /// </summary>
         internal static string RegisterHeader {
             get {
@@ -132,7 +150,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Регистрация пользователя.
+        ///   Looks up a localized string similar to User Registration.
         /// </summary>
         internal static string RegisterPageTitle {
             get {
@@ -141,7 +159,7 @@ namespace NewsPortal.Resources.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Создайте новый аккаунт для доступа к сайту.
+        ///   Looks up a localized string similar to Create a new account to access the site.
         /// </summary>
         internal static string RegisterSubtitle {
             get {

@@ -1,116 +1,74 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
+<html lang="@Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - News Portal</title>
+    <title>@ViewData["Title"] - @Localizer["NewsPortalTitle"]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
     <style>
-    body {
-        background-color: #121212;
-        color: #e0e0e0;
-    }
-
-    /* Ограничим цвет ссылок только навигацией (и обычными ссылками),
-       чтобы не ломать стили кнопок (а элементы .btn останутся нетронутыми) */
-    nav a, nav a:hover,
-    .text-link, .text-link:hover {
-        color: #ff9800;
-        text-decoration: none;
-    }
-
-    nav {
-        background-color: #1f1f1f;
-    }
-
-    .card {
-        background-color: #1e1e1e;
-        border: 1px solid #333;
-    }
-
-    /* Если используешь btn-primary где нужно — оставляем */
-    .btn-primary {
-        background-color: #ff9800;
-        border-color: #ff9800;
-        color: #fff !important;
-    }
-    .btn-primary:hover {
-        background-color: #ffa726;
-        border-color: #ffa726;
-    }
-
-    /* Явный стиль для твоей кастомной кнопки .btn-gradient */
-    .btn-gradient {
-        background: linear-gradient(45deg, #ff8c00, #ff4500);
-        border: none;
-        color: #ffffff !important;          /* обязательно белый текст */
-        box-shadow: 0 6px 18px rgba(255,140,0,0.12);
-        transition: transform .06s ease, opacity .12s ease;
-    }
-    .btn-gradient:hover,
-    .btn-gradient:focus {
-        opacity: 0.95;
-        color: #ffffff !important;
-        text-decoration: none;
-    }
-    .btn-gradient:active {
-        transform: translateY(1px);
-    }
-    
-    a.btn, a.btn:link, a.btn:visited {
-        color: #ffffff !important;
-    }
-    
-    .card-title { color: #ffb74d; } /* или text-warning уже есть */
-    .card-subtitle { color: #80deea; } /* text-info */
-</style>
-
+        body { background-color: #121212; color: #e0e0e0; }
+        nav { background-color: #1f1f1f; }
+        nav a, nav a:hover, .text-link, .text-link:hover {
+            color: #ff9800;
+            text-decoration: none;
+        }
+        .card { background-color: #1e1e1e; border: 1px solid #333; }
+        .btn-primary {
+            background-color: #ff9800;
+            border-color: #ff9800;
+            color: #fff !important;
+        }
+        .btn-primary:hover {
+            background-color: #ffa726;
+            border-color: #ffa726;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="@Url.Action("Index", "News")">News Portal</a>
+        <a class="navbar-brand" href="@Url.Action("Index", "News")">@Localizer["NewsPortalTitle"]</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "News")">Latest</a></li>
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("All", "News")">All News</a></li>
+                <li class="nav-item"><a class="nav-link text-primary" href="@Url.Action("Index", "News")">@Localizer["LatestLink"]</a></li>
+                <li class="nav-item"><a class="nav-link text-danger" href="@Url.Action("All", "News")">@Localizer["AllNewsLink"]</a></li>
 
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    <li class="nav-item"><a class="nav-link text-bg-success" href="@Url.Action("Index", "Admin")">Admin Panel</a></li>
-                    <li class="nav-item">
-                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-link nav-link text-warning">Logout</button>
-                        </form>
-                    </li>
+                <li class="nav-item"><a class="nav-link text-bg-success" href="@Url.Action("Index", "Admin")">@Localizer["AdminPanelLink"]</a></li>
+                <li class="nav-item">
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-link nav-link text-warning">@Localizer["LogoutLink"]</button>
+                    </form>
+                </li>
                 }
                 else
                 {
-                    <li class="nav-item">
-                        <a class="nav-link text-warning" href="@Url.Action("Login", "Account")">Login</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="@Url.Action("Login", "Account")">@Localizer["LoginLink"]</a>
+                </li>
                 }
 
-                <!-- Language dropdown -->
                 <div class="dropdown me-3">
                     <button class="btn btn-outline-light dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown">
                         @Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="langDropdown">
                         <li>
-                            <a class="dropdown-item" href="@Url.Action("SetLanguage", "News", new { culture = "ru", returnUrl = Context.Request.Path })">Русский</a>
+                            <a class="dropdown-item" href="@Url.Action("SetLanguage", "News", new { culture = "ru", returnUrl = Context.Request.Path })">@Localizer["LanguageRussian"]</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="@Url.Action("SetLanguage", "News", new { culture = "en", returnUrl = Context.Request.Path })">English</a>
+                            <a class="dropdown-item" href="@Url.Action("SetLanguage", "News", new { culture = "en", returnUrl = Context.Request.Path })">@Localizer["LanguageEnglish"]</a>
                         </li>
                     </ul>
                 </div>
-
-
             </ul>
         </div>
     </div>
@@ -121,8 +79,6 @@
 </div>
 
 @RenderSection("Scripts", required: false)
-
-<!-- ✅ обязательно для работы dropdown -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

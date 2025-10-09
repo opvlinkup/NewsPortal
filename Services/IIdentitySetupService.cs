@@ -2,5 +2,5 @@
 
 public interface IIdentitySetupService
 {
-    Task EnsureRolesAsync();
+    Task EnsureRolesAndUsersAsync();
 }

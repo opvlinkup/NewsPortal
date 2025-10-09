@@ -5,7 +5,7 @@
 }
 <div class="container d-flex justify-content-center align-items-center" style="min-height:80vh;">
     <div class="card bg-dark text-light shadow-lg p-4" style="max-width:420px;width:100%;">
-        <h2 class="mb-4 text-center">Вход администратора</h2>
+        <h2 class="mb-4 text-center">Вход</h2>
 
         <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
             @Html.AntiForgeryToken()
@@ -36,7 +36,7 @@
             <a asp-controller="Account"
                asp-action="Register"
                class="text-info">
-                Register as Administrator
+                Register new account
             </a>
         </div>
     </div>

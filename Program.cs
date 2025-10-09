@@ -43,9 +43,15 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 builder.Services.ConfigureApplicationCookie(opt =>
 {
+    opt.Cookie.Name = "NewsPortal.Auth";
+    opt.Cookie.HttpOnly = true;
+    opt.ExpireTimeSpan = TimeSpan.FromHours(2);
+    opt.SlidingExpiration = true;  
     opt.LoginPath = "/Admin/Account/Login";
     opt.LogoutPath = "/Admin/Account/Logout";
     opt.AccessDeniedPath = "/Admin/Account/Login";
+    opt.Cookie.SecurePolicy = CookieSecurePolicy.Always; 
+    opt.Cookie.SameSite = SameSiteMode.Strict;            
 });
 
 builder.Services.AddScoped<IArticleService, ArticleService>();
@@ -59,7 +65,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var setup = scope.ServiceProvider.GetRequiredService<IIdentitySetupService>();
-    await setup.EnsureRolesAsync();
+    await setup.EnsureRolesAndUsersAsync();
     var dbContext = scope.ServiceProvider.GetRequiredService<NPDbContext>();
     await ArticleSeeder.SeedAsync(dbContext);
 }

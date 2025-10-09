@@ -1,12 +1,15 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
     Layout = null;
+    ViewData["Title"] = Localizer["AdminPanelTitle"];
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Admin Panel</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
     <style>
         body { background-color: #0d0d0d; color: #f5f5f5; }
@@ -18,9 +21,9 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="@Url.Action("Index", "Admin")">Admin Panel</a>
+        <a class="navbar-brand" href="@Url.Action("Index", "Admin")">@Localizer["AdminPanelNavbar"]</a>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "News")">Back</a></li>
+            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "News")">@Localizer["BackLink"]</a></li>
         </ul>
     </div>
 </nav>
