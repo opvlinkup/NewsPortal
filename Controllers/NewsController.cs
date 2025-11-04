@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Models.ViewModels;
+using NewsPortal.Services;
 
 namespace NewsPortal.Controllers
 {
@@ -16,12 +17,12 @@ namespace NewsPortal.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken = default)
         {
             var culture = GetCurrentLanguage();
             logger.LogInformation("Fetching latest articles for culture {Culture}", culture);
 
-            var articles = await articleService.GetLatestAsync(6);
+            var articles = await articleService.GetLatestAsync(6, cancellationToken);
             logger.LogDebug("Fetched {Count} latest articles", articles.Count);
 
             var articleVms = articles
@@ -70,7 +71,7 @@ namespace NewsPortal.Controllers
         }
 
         [HttpGet("GetArticles")]
-        public async Task<IActionResult> GetArticles(int skip = 0, int take = 6)
+        public async Task<IActionResult> GetArticles(int skip = 0, int take = 6, CancellationToken cancellationToken = default)
         {
             var culture = GetCurrentLanguage();
             logger.LogInformation(
@@ -80,7 +81,7 @@ namespace NewsPortal.Controllers
                 culture
             );
 
-            var articles = await articleService.GetPagedAsync(skip, take);
+            var articles = await articleService.GetPagedAsync(skip, take, cancellationToken);
 
             if (!articles.Any())
             {
@@ -116,7 +117,7 @@ namespace NewsPortal.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid id, CancellationToken cancellationToken = default)
         {
             var culture = GetCurrentLanguage();
             logger.LogInformation(
@@ -125,7 +126,7 @@ namespace NewsPortal.Controllers
                 culture
             );
 
-            var article = await articleService.GetByIdAsync(id);
+            var article = await articleService.GetByIdAsync(id, cancellationToken);
             if (article == null)
             {
                 logger.LogWarning("Article {ArticleId} not found", id);

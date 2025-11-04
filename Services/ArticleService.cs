@@ -14,24 +14,27 @@ namespace NewsPortal.Services
             _context = context;
             _env = env;
         }
-        
 
-        public async Task<List<Article>> GetPagedAsync(int skip, int take) =>
+        public async Task<List<Article>> GetPagedAsync(
+            int skip,
+            int take,
+            CancellationToken ctx = default
+        ) =>
             await _context
                 .Articles.OrderByDescending(a => a.CreatedAt)
                 .Skip(skip)
                 .Take(take)
                 .Include(a => a.Translations)
-                .ToListAsync();
+                .ToListAsync(ctx);
 
-        public async Task<Article?> GetByIdAsync(Guid id)
+        public async Task<Article?> GetByIdAsync(Guid id, CancellationToken ctx = default)
         {
             return await _context
                 .Articles.Include(a => a.Translations)
-                .FirstOrDefaultAsync(a => a.Id == id);
+                .FirstOrDefaultAsync(a => a.Id == id, ctx);
         }
 
-        public async Task<List<Article>> GetLatestAsync(int count)
+        public async Task<List<Article>> GetLatestAsync(int count, CancellationToken ctx = default)
         {
             if (count <= 0)
                 return new List<Article>();
@@ -40,27 +43,35 @@ namespace NewsPortal.Services
                 .Articles.Include(a => a.Translations)
                 .OrderByDescending(a => a.CreatedAt)
                 .Take(count)
-                .ToListAsync();
+                .ToListAsync(ctx);
         }
 
-        public async Task<Article> CreateAsync(Article article, IFormFile? imageFile)
+        public async Task<Article> CreateAsync(
+            Article article,
+            IFormFile? imageFile,
+            CancellationToken ctx = default
+        )
         {
             if (imageFile is not null)
             {
-                article.ImagePath = await SaveImageAsync(imageFile);
+                article.ImagePath = await SaveImageAsync(imageFile, ctx);
             }
 
-            _context.Articles.Add(article);
-            await _context.SaveChangesAsync();
+            await _context.Articles.AddAsync(article, ctx);
+            await _context.SaveChangesAsync(ctx);
             return article;
         }
 
-        public async Task UpdateAsync(Article article, IFormFile? imageFile)
+        public async Task UpdateAsync(
+            Article article,
+            IFormFile? imageFile,
+            CancellationToken ctx = default
+        )
         {
             var existing =
                 await _context
                     .Articles.Include(a => a.Translations)
-                    .FirstOrDefaultAsync(a => a.Id == article.Id)
+                    .FirstOrDefaultAsync(a => a.Id == article.Id, ctx)
                 ?? throw new KeyNotFoundException("Статья не найдена");
 
             existing.UpdatedAt = DateTime.UtcNow;
@@ -68,7 +79,7 @@ namespace NewsPortal.Services
             if (imageFile is not null)
             {
                 DeleteImageIfExists(existing.ImagePath);
-                existing.ImagePath = await SaveImageAsync(imageFile);
+                existing.ImagePath = await SaveImageAsync(imageFile, ctx);
             }
 
             foreach (var translation in article.Translations)
@@ -97,26 +108,26 @@ namespace NewsPortal.Services
                 }
             }
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(ctx);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id, CancellationToken ctx = default)
         {
             var article =
                 await _context
                     .Articles.Include(a => a.Translations)
-                    .FirstOrDefaultAsync(a => a.Id == id)
+                    .FirstOrDefaultAsync(a => a.Id == id, ctx)
                 ?? throw new KeyNotFoundException("Статья не найдена");
 
             DeleteImageIfExists(article.ImagePath);
 
             _context.Articles.Remove(article);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(ctx);
         }
 
         // -------- utils --------
 
-        private async Task<string> SaveImageAsync(IFormFile file)
+        private async Task<string> SaveImageAsync(IFormFile file, CancellationToken ctx = default)
         {
             var uploadsDir = Path.Combine(_env.WebRootPath, "uploads");
             Directory.CreateDirectory(uploadsDir);
@@ -125,7 +136,7 @@ namespace NewsPortal.Services
             var fullPath = Path.Combine(uploadsDir, fileName);
 
             await using var stream = new FileStream(fullPath, FileMode.Create);
-            await file.CopyToAsync(stream);
+            await file.CopyToAsync(stream, ctx);
 
             return "/uploads/" + fileName;
         }
